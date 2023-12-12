@@ -1,4 +1,4 @@
-#import "@preview/cetz:0.1.2": draw
+#import "@preview/cetz:0.1.2"
 
 #let riemann(
   fn,
@@ -6,11 +6,15 @@
   end: 10,
   n: 10,
   y-scale: 1,
-  domain-offset: 0,
+  x-offset: 0,
   range-offset: 0,
   hand: "left",
   transparency: 100%,
   dot-radius: 0.055,
+  plot: true,
+  plot-grid: false,
+  plot-x-tick-step: auto,
+  plot-y-tick-step: auto,
   positive-color: color.green,
   negative-color: color.red) = {
 
@@ -41,20 +45,38 @@
         bar-color = negative-color
         mark-vertical = "bottom"
       }
-      draw.fill(col-trans(
+      cetz.draw.fill(col-trans(
         bar-color.lighten(70%).darken(8%),
         transparency
       ))
-      draw.rect(
-        (i + domain-offset, range-offset),
-        (i + domain-offset + 1, (height/y-scale) + range-offset),
+      cetz.draw.rect(
+        (i + x-offset, range-offset),
+        (i + x-offset + 1, (height/y-scale) + range-offset),
         stroke: col-trans(bar-color.darken(30%), 90%) + 1.1pt,
         name: "r"
       )
-      draw.circle(
+      cetz.draw.circle(
         "r." + mark-vertical + mark-horizontal,
         radius: dot-radius,
         fill: bar-color
       )
    }
+   if plot {
+     cetz.plot.plot(size: (6 + x-offset, 6),
+      x-grid: plot-grid,
+      y-grid: plot-grid,
+      axis-style: "school-book",
+      x-tick-step: plot-x-tick-step,
+      y-tick-step: plot-y-tick-step,
+      {
+        cetz.plot.add(
+          domain: (start - x-offset, end),
+          x => fn(x),
+          style: (
+            stroke: blue + 1.5pt,
+          ),
+        )
+      }
+    )
+  }
 }
