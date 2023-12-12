@@ -8,8 +8,6 @@ $f(x) = 16 - x^2$
 
 #line(length: 2in)
 
-=== Left-hand Riemann sum
-
 #let f(x) = 16 - x * x
 
 #let demo(hand) = {
@@ -49,6 +47,8 @@ $f(x) = 16 - x^2$
     transparency: 40%,
   )
 }
+
+=== Left-hand Riemann sum
 
 #canvas({
   demo("left")
