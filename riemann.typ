@@ -5,7 +5,7 @@
 /// - fn (function): The function to draw a Riemann sum of.
 /// - start (number): Where to start drawing bars.
 /// - end (number): Where to end drawing bars.
-/// - n (number): Number of bars (please make Delta x = 1).
+/// - n (number): Number of bars (please make $Delta x =1$).
 /// - y-scale (number): Y scale of bars.
 /// - x-offset (number): X offset of bars.
 /// - y-offset (number): Y offset of bars.
