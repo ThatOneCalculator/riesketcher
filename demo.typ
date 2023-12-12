@@ -27,8 +27,7 @@ $f(x) = 16 - x^2$
     y-scale: 6,
     x-offset: x-offset,
     plot-x-tick-step: 1,
-    range-offset: 10/3,
-    transparency: 40%,
+    y-offset: 10/3,
   )
 }
 
