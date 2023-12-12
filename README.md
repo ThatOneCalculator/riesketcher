@@ -16,7 +16,7 @@ Otherwise, add the `riemann.typ` file to your project and import it as normal:
 #import "riemann.typ": riemann
 ``` -->
 
-Usage example in `example.typ`
+Usage example and docs: [manual.pdf](https://github.com/ThatOneCalculator/riemann-sum-typst-cetz/blob/main/manual.pdf)
 
 All paramenters:
 
