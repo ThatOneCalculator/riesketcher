@@ -32,7 +32,10 @@
   // Color of positive bars
   positive-color: color.green,
   // Color of negative bars
-  negative-color: color.red) = {
+  negative-color: color.red,
+  // Color of plotted line
+  plot-line-color: color.blue,
+) = {
 
     let hand-offset = 0
     let mark-horizontal = "-left"
@@ -48,6 +51,25 @@
     let col-trans(color, opacity) = {
       let space = color.space()
       space(..color.components(alpha: false), opacity)
+    }
+
+    if plot {
+     cetz.plot.plot(
+       size: (end + x-offset, end),
+       x-grid: plot-grid,
+       y-grid: plot-grid,
+       axis-style: "school-book",
+       x-tick-step: plot-x-tick-step,
+       y-tick-step: plot-y-tick-step,
+       {
+         cetz.plot.add(
+           domain: (start - x-offset, end),
+           x => fn(x),
+           style: (
+            stroke: plot-line-color + 1.5pt,
+          ),
+        )
+      })
     }
 
     // Doesn't work if Delta n != 1
@@ -77,22 +99,4 @@
         fill: bar-color
       )
    }
-   if plot {
-     cetz.plot.plot(size: (6 + x-offset, 6),
-      x-grid: plot-grid,
-      y-grid: plot-grid,
-      axis-style: "school-book",
-      x-tick-step: plot-x-tick-step,
-      y-tick-step: plot-y-tick-step,
-      {
-        cetz.plot.add(
-          domain: (start - x-offset, end),
-          x => fn(x),
-          style: (
-            stroke: blue + 1.5pt,
-          ),
-        )
-      }
-    )
-  }
 }

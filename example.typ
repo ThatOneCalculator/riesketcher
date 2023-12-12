@@ -1,5 +1,5 @@
 #import "@preview/cetz:0.1.2": canvas, draw, plot
-#import "riemann.typ": riemann
+#import "@local/riemann:0.1.0": riemann
 
 #set page(width: auto, height: auto, margin: 0.2in)
 #set align(center)
