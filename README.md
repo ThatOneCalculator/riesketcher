@@ -43,4 +43,4 @@ negative-color: color.red,
 plot-line-color: color.blue
 ```
 
-![Demo](https://github.com/ThatOneCalculator/riemann-sum-typst-cetz/assets/44733677/30c01ebc-915a-4322-8374-1c674cda0cb1)
+![Demo](assets/example.png)
