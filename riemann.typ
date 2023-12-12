@@ -7,7 +7,7 @@
   start: 0,
   // End
   end: 10,
-  // Number of bars (please made Delta x = 1)
+  // Number of bars (please make Delta x = 1)
   n: 10,
   // Y scale
   y-scale: 1,
