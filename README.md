@@ -1,6 +1,20 @@
 # Riemann sum graphs in Typst with CeTZ
 
+A package to draw Riemann sums (and their plots) of a function with CeTZ.
+
 <https://typst.app/project/rnDsqxCFu3U_vj-qIM_Hsm>
+
+On Typst v0.6.0+ you can import the `riemann` package:
+
+```typst
+#import "@preview/riemann:0.1.0": riemann
+```
+
+Otherwise, add the `riemann.typ` file to your project and import it as normal:
+
+```typst
+#import "riemann.typ": riemann
+```
 
 Usage example in `example.typ`
 
