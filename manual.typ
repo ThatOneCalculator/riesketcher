@@ -1,14 +1,14 @@
 #import "@preview/tidy:0.1.0"
 #import "@preview/cetz:0.1.2": canvas
-#import "riesketcher.typ": riemann
-// #import "@preview/riemann:0.1.0": riesketcher
+#import "riesketcher.typ": riesketcher
+// #import "@preview/riesketcher:0.1.0": riesketcher
 
 #set text(size: 10.5pt)
 
 = Riesketcher
 A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```typst
-#import "@preview/riemann:0.1.0": riesketcher
+#import "@preview/riesketcher:0.1.0": riesketcher
 ```
 
 == Examples with $f(x) = 16 - x^2$
@@ -26,7 +26,7 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
      x-offset = 0.5
    }
 
-  riemann(
+  riesketcher(
     x => f(x),
     hand: hand,
     end: 6,
@@ -43,7 +43,7 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
     #align(left)[=== #h(0.55in) Left-hand Riemann sum]
 
     ```typst
-    #riemann(
+    #riesketcher(
         x => f(x) = 16 - x * x,
         hand: "left",
         end: 6,
@@ -60,7 +60,7 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
     #align(left)[=== #h(0.55in) Midpoint Riemann sum]
 
     ```typst
-    #riemann(
+    #riesketcher(
         x => f(x) = 16 - x * x,
         hand: "mid",
         end: 6,
@@ -77,7 +77,7 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
     #align(left)[=== #h(0.55in) Right-hand Riemann sum]
 
     ```typst
-    #riemann(
+    #riesketcher(
         x => f(x) = 16 - x * x,
         hand: "right",
         end: 6,
@@ -105,5 +105,5 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
 
 == Method parameters
 
-#let riemann-tidy = tidy.parse-module(read("riesketcher.typ"), name: "Riemann")
-#tidy.show-module(riemann-tidy)
+#let riesketcher-tidy = tidy.parse-module(read("riesketcher.typ"), name: "riesketcher")
+#tidy.show-module(riesketcher-tidy)
