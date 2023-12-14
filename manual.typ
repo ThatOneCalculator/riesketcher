@@ -1,17 +1,19 @@
 #import "@preview/tidy:0.1.0"
 #import "@preview/cetz:0.1.2": canvas
-#import "riemann.typ": riemann
+#import "riesketcher.typ": riemann
+// #import "@preview/riemann:0.1.0": riesketcher
 
 #set text(size: 10.5pt)
 
-= Riemann package for Typst
-Kainoa Kanter
+= Rieksetcher
+A package to draw Riemann sums (and their plots) of a function with CeTZ.
+```typst
+#import "@preview/riemann:0.1.0": riesketcher
+```
 
-== Examples
+== Examples with $f(x) = 16 - x^2$
 
 #set align(center)
-
-$f(x) = 16 - x^2$
 
 #let f(x) = 16 - x * x
 
@@ -38,7 +40,7 @@ $f(x) = 16 - x^2$
 
 #columns(2)[
     #v(0.2in)
-    === Left-hand Riemann sum
+    #align(left)[=== #h(0.55in) Left-hand Riemann sum]
 
     ```typst
     #riemann(
@@ -55,7 +57,7 @@ $f(x) = 16 - x^2$
 
     #v(1.2in)
 
-    === Midpoint Riemann sum
+    #align(left)[=== #h(0.55in) Midpoint Riemann sum]
 
     ```typst
     #riemann(
@@ -72,7 +74,7 @@ $f(x) = 16 - x^2$
 
     #v(1in)
 
-    === Right-hand Riemann sum
+    #align(left)[=== #h(0.55in) Right-hand Riemann sum]
 
     ```typst
     #riemann(
@@ -89,17 +91,11 @@ $f(x) = 16 - x^2$
 
     #colbreak()
 
-    #canvas({
-    demo("left")
-    })
+    #canvas({ demo("left") })
 
-    #canvas({
-    demo("mid")
-    })
+    #canvas({ demo("mid") })
 
-    #canvas({
-    demo("right")
-    })
+    #canvas({ demo("right") })
 
 ]
 
@@ -109,5 +105,5 @@ $f(x) = 16 - x^2$
 
 == Method parameters
 
-#let riemann-tidy = tidy.parse-module(read("riemann.typ"), name: "Riemann")
+#let riemann-tidy = tidy.parse-module(read("riesketcher.typ"), name: "Riemann")
 #tidy.show-module(riemann-tidy)
