@@ -5,7 +5,7 @@
 
 #set text(size: 10.5pt)
 
-= Rieksetcher
+= Riesketcher
 A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```typst
 #import "@preview/riemann:0.1.0": riesketcher
