@@ -5,6 +5,6 @@ entrypoint = "riesketcher.typ"
 authors = ["Kainoa Kanter"]
 license = "MIT"
 description = "A package to draw Riemann sums (and their plots) of a function with CeTZ."
-repository = "https://github.com/ThatOneCalculator/riemann-sum-typst-cetz"
+repository = "https://github.com/ThatOneCalculator/riesketcher"
 exclude = ["manual.typ", "manual.pdf"]
 keywords = ["riemann", "integral", "graph", "calculus", "cetz"]
