@@ -1,14 +1,14 @@
-#import "@preview/cetz:0.1.2"
+#import "@preview/cetz:0.2.0"
 
 /// Draw a Riemann sum of a function, and optionally plot the function.
 ///
 /// - fn (function): The function to draw a Riemann sum of.
+/// - domain (array): Tuple of the domain of fn. If a tuple value is auto, that
+///   value is set to start/end.
 /// - start (number): Where to start drawing bars.
 /// - end (number): Where to end drawing bars.
-/// - n (number): Number of bars (please make $Delta x =1$).
+/// - n (number): Number of bars
 /// - y-scale (number): Y scale of bars.
-/// - x-offset (number): X offset of bars.
-/// - y-offset (number): Y offset of bars.
 /// - hand (string): Where points are derrived from. Can be "left", "mid"/"midpoint", or "right".
 /// - transparency (number): Transparency fill of bars.
 /// - dot-radius (number): Radius of dots.
@@ -23,13 +23,12 @@
   fn,
   start: 0,
   end: 10,
+  domain: (auto, auto),
   n: 10,
   y-scale: 1,
-  x-offset: 0,
-  y-offset: 0,
   hand: "left",
   transparency: 40%,
-  dot-radius: 0.055,
+  dot-radius: 0.15,
   plot: true,
   plot-grid: false,
   plot-x-tick-step: auto,
@@ -37,17 +36,18 @@
   positive-color: color.green,
   negative-color: color.red,
   plot-line-color: color.blue,
+  size: (5, 5),
 ) = {
+    // Adjust the function domain if set to auto
+    if domain.at(0) == auto { domain.at(0) = start }
+    if domain.at(1) == auto { domain.at(1) = end }
 
-    let hand-offset = 0
-    let mark-horizontal = "-left"
+    let hand-offset = 0%
     if hand == "right" {
-      hand-offset = 1
-      mark-horizontal = "-right"
-    } 
+      hand-offset = 100%
+    }
     else if hand == "mid" or hand == "midpoint" {
-      hand-offset = 0.5
-      mark-horizontal = ""
+      hand-offset = 50%
     }
 
     let col-trans(color, opacity) = {
@@ -55,50 +55,67 @@
       space(..color.components(alpha: false), opacity)
     }
 
-    if plot {
-     cetz.plot.plot(
-       size: (end + x-offset, end),
-       x-grid: plot-grid,
-       y-grid: plot-grid,
-       axis-style: "school-book",
-       x-tick-step: plot-x-tick-step,
-       y-tick-step: plot-y-tick-step,
-       {
-         cetz.plot.add(
-           domain: (start - x-offset, end),
-           x => fn(x),
-           style: (
-            stroke: plot-line-color + 1.5pt,
-          ),
-        )
-      })
+    let delta = end - start
+    let bar-width = (end - start) / n
+    let bar-position = if hand == "left" {
+      "start"
+    } else if hand == "right" {
+      "end"
+    } else {
+      "center"
     }
 
-    // Doesn't work if Delta n != 1
-    // Should be `for i in range(start, end, step: (end - start)/n).map(...`
-    // https://github.com/typst/typst/issues/2908
-    for i in range(start, end).map(x => x * n/(end - start)) {
-      let height = fn(i + hand-offset)
-      let bar-color = positive-color
-      let mark-vertical = "top"
-      if fn(i) <= 0 {
-        bar-color = negative-color
-        mark-vertical = "bottom"
-      }
-      cetz.draw.fill(col-trans(
-        bar-color.lighten(70%).darken(8%),
-        transparency
-      ))
-      cetz.draw.rect(
-        (i + x-offset, y-offset),
-        (i + x-offset + 1, (height/y-scale) + y-offset),
-        stroke: col-trans(bar-color.darken(30%), 90%) + 1.1pt,
-        name: "r"
-      )
-      cetz.draw.circle(
-        "r." + mark-vertical + mark-horizontal,
-        radius: dot-radius,
-        fill: bar-color
-      )
-   }
+    let bar-y = range(0, n).map(x => {
+      let x = start + bar-width * (x + hand-offset / 100%)
+      (x, fn(x))
+    })
+
+    let positive-bar-style = (
+      fill: col-trans(positive-color.lighten(70%).darken(8%), transparency),
+      stroke: col-trans(positive-color.darken(30%), 90%) + 1.1pt
+    )
+    let negative-bar-style = (
+      : ..positive-bar-style,
+      fill: col-trans(negative-color.lighten(70%).darken(8%), transparency),
+      stroke: col-trans(negative-color.darken(30%), 90%) + 1.1pt
+    )
+    let positive-dot-style = (
+      stroke: black,
+      fill: positive-color
+    )
+    let negative-dot-style = (
+      : ..positive-dot-style,
+      fill: negative-color,
+    )
+
+    cetz.plot.plot(
+      size: size,
+      x-grid: plot-grid,
+      y-grid: plot-grid,
+      axis-style: if plot { "school-book" } else { none },
+      x-tick-step: plot-x-tick-step,
+      y-tick-step: plot-y-tick-step,
+      {
+        for (x, y) in bar-y {
+          cetz.plot.add-bar(((x, y),),
+            bar-width: bar-width,
+            bar-position: bar-position,
+            style: if y >= 0 { positive-bar-style } else { negative-bar-style })
+        }
+
+        if plot {
+          cetz.plot.add(
+            domain: domain,
+            x => fn(x),
+            style: (stroke: plot-line-color + 1.5pt))
+        }
+
+        for (x, y) in bar-y {
+          cetz.plot.add(((x, y),),
+            mark: "o",
+            style: (stroke: none),
+            mark-size: dot-radius,
+            mark-style:if y >= 0 { positive-dot-style } else { negative-dot-style })
+        }
+      })
 }
