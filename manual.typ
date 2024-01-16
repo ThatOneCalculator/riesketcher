@@ -1,5 +1,5 @@
 #import "@preview/tidy:0.1.0"
-#import "@preview/cetz:0.1.2": canvas
+#import "@preview/cetz:0.2.0": canvas
 #import "riesketcher.typ": riesketcher
 // #import "@preview/riesketcher:0.1.0": riesketcher
 
@@ -11,96 +11,54 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
 #import "@preview/riesketcher:0.1.0": riesketcher
 ```
 
-== Examples with $f(x) = 16 - x^2$
+#show raw.where(lang: "example"): it => block({
+  table(columns: (50%, 50%), stroke: none, align: (center + horizon, left),
+    align(left, raw(lang: "typc", it.text)),
+    eval("canvas({" + it.text + "})", scope: (canvas: canvas, riesketcher: riesketcher))
+  )
+})
 
-#set align(center)
+== Examples
+=== Left-Hand Riemann sum
 
-#let f(x) = 16 - x * x
+```example
+riesketcher(
+    x => calc.pow(x, 3) + 4,
+    hand: "left",
+    start: -3.1,
+    end: 3.5,
+    n: 10,
+    plot-x-tick-step: 1,
+)
+```
 
-#let demo(hand) = {
-  let x-offset = 0
-  if hand == "right" {
-     x-offset = 1
-   }
-  else if hand == "mid" or hand == "midpoint" {
-     x-offset = 0.5
-   }
+=== Midpoint Riemann sum
 
-  riesketcher(
-    x => f(x),
-    hand: hand,
+```example
+riesketcher(
+    x => -calc.pow(x, 2) + 9,
+    hand: "mid",
+    domain: (-4, 4),
+    start: -3,
+    end: 3,
+    n: 6,
+    plot-x-tick-step: 1,
+)
+```
+=== Right-hand Riemann sum
+
+```example
+riesketcher(
+    x => 16 - x * x,
+    hand: "right",
     end: 6,
     n: 6,
-    y-scale: 6,
-    x-offset: x-offset,
+    domain: (-1, auto),
     plot-x-tick-step: 1,
-    y-offset: 10/3,
-  )
-}
-
-#columns(2)[
-    #v(0.2in)
-    #align(left)[=== #h(0.55in) Left-hand Riemann sum]
-
-    ```typst
-    #riesketcher(
-        x => f(x) = 16 - x * x,
-        hand: "left",
-        end: 6,
-        n: 6,
-        y-scale: 6,
-        x-offset: 0,
-        plot-x-tick-step: 1,
-        y-offset: 10/3,
-    )
-    ```
-
-    #v(1.2in)
-
-    #align(left)[=== #h(0.55in) Midpoint Riemann sum]
-
-    ```typst
-    #riesketcher(
-        x => f(x) = 16 - x * x,
-        hand: "mid",
-        end: 6,
-        n: 6,
-        y-scale: 6,
-        x-offset: 0.5,
-        plot-x-tick-step: 1,
-        y-offset: 10/3,
-    )
-    ```
-
-    #v(1in)
-
-    #align(left)[=== #h(0.55in) Right-hand Riemann sum]
-
-    ```typst
-    #riesketcher(
-        x => f(x) = 16 - x * x,
-        hand: "right",
-        end: 6,
-        n: 6,
-        y-scale: 6,
-        x-offset: 1,
-        plot-x-tick-step: 1,
-        y-offset: 10/3,
-    )
-    ```
-
-    #colbreak()
-
-    #canvas({ demo("left") })
-
-    #canvas({ demo("mid") })
-
-    #canvas({ demo("right") })
-
-]
+)
+```
 
 #pagebreak()
-
 #set align(left)
 
 == Method parameters
