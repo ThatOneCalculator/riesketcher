@@ -9,7 +9,7 @@
 /// - end (number): Where to end drawing bars.
 /// - n (number): Number of bars
 /// - y-scale (number): Y scale of bars.
-/// - hand (string): Where points are derrived from. Can be "left", "mid"/"midpoint", or "right".
+/// - method (string): Where points are derrived from. Can be "left", "mid"/"midpoint", or "right".
 /// - transparency (number): Transparency fill of bars.
 /// - dot-radius (number): Radius of dots.
 /// - plot (boolean): Whether to add plot of the function.
@@ -26,7 +26,7 @@
   domain: (auto, auto),
   n: 10,
   y-scale: 1,
-  hand: "left",
+  method: "left",
   transparency: 40%,
   dot-radius: 0.15,
   plot: true,
@@ -42,12 +42,12 @@
     if domain.at(0) == auto { domain.at(0) = start }
     if domain.at(1) == auto { domain.at(1) = end }
 
-    let hand-offset = 0%
-    if hand == "right" {
-      hand-offset = 100%
+    let horizontal-hand-offset = 0%
+    if method == "right" {
+      horizontal-hand-offset = 100%
     }
-    else if hand == "mid" or hand == "midpoint" {
-      hand-offset = 50%
+    else if method == "mid" or method == "midpoint" {
+      horizontal-hand-offset = 50%
     }
 
     let col-trans(color, opacity) = {
@@ -57,16 +57,16 @@
 
     let delta = end - start
     let bar-width = (end - start) / n
-    let bar-position = if hand == "left" {
+    let bar-position = if method == "left" {
       "start"
-    } else if hand == "right" {
+    } else if method == "right" {
       "end"
     } else {
       "center"
     }
 
     let bar-y = range(0, n).map(x => {
-      let x = start + bar-width * (x + hand-offset / 100%)
+      let x = start + bar-width * (x + horizontal-hand-offset / 100%)
       (x, fn(x))
     })
 

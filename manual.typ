@@ -24,7 +24,7 @@ A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```example
 riesketcher(
     x => calc.pow(x, 3) + 4,
-    hand: "left",
+    method: "left",
     start: -3.1,
     end: 3.5,
     n: 10,
@@ -37,7 +37,7 @@ riesketcher(
 ```example
 riesketcher(
     x => -calc.pow(x, 2) + 9,
-    hand: "mid",
+    method: "mid",
     domain: (-4, 4),
     start: -3,
     end: 3,
@@ -45,12 +45,12 @@ riesketcher(
     plot-x-tick-step: 1,
 )
 ```
-=== Right-hand Riemann sum
+=== Right-method Riemann sum
 
 ```example
 riesketcher(
     x => 16 - x * x,
-    hand: "right",
+    method: "right",
     end: 6,
     n: 6,
     domain: (-1, auto),
