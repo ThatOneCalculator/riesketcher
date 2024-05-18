@@ -1,4 +1,4 @@
-#import "@preview/cetz:0.2.0"
+#import "@preview/cetz:0.2.2"
 
 /// Draw a Riemann sum of a function, and optionally plot the function.
 ///

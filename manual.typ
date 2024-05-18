@@ -1,5 +1,5 @@
 #import "@preview/tidy:0.1.0"
-#import "@preview/cetz:0.2.0": canvas
+#import "@preview/cetz:0.2.2": canvas
 #import "riesketcher.typ": riesketcher
 // #import "@preview/riesketcher:0.2.0": riesketcher
 
