@@ -1,6 +1,6 @@
 [package]
 name = "riesketcher"
-version = "0.2.0"
+version = "0.2.1"
 entrypoint = "riesketcher.typ"
 authors = ["Kainoa Kanter"]
 license = "MIT"
