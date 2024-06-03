@@ -8,7 +8,7 @@
 = Riesketcher
 A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```typst
-#import "@preview/riesketcher:0.2.0": riesketcher
+#import "@preview/riesketcher:0.2.1": riesketcher
 ```
 
 #show raw.where(lang: "example"): it => block({
