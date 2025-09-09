@@ -92,6 +92,8 @@
       size: size,
       x-grid: plot-grid,
       y-grid: plot-grid,
+      x-label: $x$,
+      y-label: $y$,
       axis-style: if plot { "school-book" } else { none },
       x-tick-step: plot-x-tick-step,
       y-tick-step: plot-y-tick-step,
