@@ -1,4 +1,4 @@
-#import "@preview/cetz:0.2.2"
+#import "@preview/cetz-plot:0.1.2"
 
 /// Draw a Riemann sum of a function, and optionally plot the function.
 ///
@@ -88,7 +88,7 @@
       fill: negative-color,
     )
 
-    cetz.plot.plot(
+    cetz-plot.plot.plot(
       size: size,
       x-grid: plot-grid,
       y-grid: plot-grid,
@@ -97,21 +97,21 @@
       y-tick-step: plot-y-tick-step,
       {
         for (x, y) in bar-y {
-          cetz.plot.add-bar(((x, y),),
+          cetz-plot.plot.add-bar(((x, y),),
             bar-width: bar-width,
             bar-position: bar-position,
             style: if y >= 0 { positive-bar-style } else { negative-bar-style })
         }
 
         if plot {
-          cetz.plot.add(
+          cetz-plot.plot.add(
             domain: domain,
             x => fn(x),
             style: (stroke: plot-line-color + 1.5pt))
         }
 
         for (x, y) in bar-y {
-          cetz.plot.add(((x, y),),
+          cetz-plot.plot.add(((x, y),),
             mark: "o",
             style: (stroke: none),
             mark-size: dot-radius,
