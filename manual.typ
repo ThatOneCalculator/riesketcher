@@ -1,14 +1,14 @@
 #import "@preview/tidy:0.1.0"
 #import "@preview/cetz:0.4.1": canvas
 #import "riesketcher.typ": riesketcher
-// #import "@preview/riesketcher:0.2.2": riesketcher
+// #import "@preview/riesketcher:0.3.0": riesketcher
 
 #set text(size: 10.5pt)
 
 = Riesketcher
 A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```typst
-#import "@preview/riesketcher:0.2.2": riesketcher
+#import "@preview/riesketcher:0.3.0": riesketcher
 ```
 
 #show raw.where(lang: "example"): it => block({
@@ -45,6 +45,7 @@ riesketcher(
     plot-x-tick-step: 1,
 )
 ```
+
 === Right-method Riemann sum
 
 ```example
@@ -55,6 +56,32 @@ riesketcher(
     n: 6,
     domain: (-1, auto),
     plot-x-tick-step: 1,
+)
+```
+
+=== Custom untagged partition (midpoint method)
+
+```example
+riesketcher(
+  x => 0.17 * calc.pow(x, 3)
+    + 1.5 * calc.sin(calc.cos(x)),
+  method: "mid",
+  partition: (-3, -1.5, -0.75, -0.2, 0.8, 1.5,
+    2.3, 3.4),
+  plot-x-tick-step: 2,
+)
+```
+
+=== Tagged partition
+
+```example
+riesketcher(
+  x => 0.5 * calc.pow(x, 3)
+    - 0.9 * calc.cos(x),
+  partition: (-3.2, -2.1, -1.1, 0.4, 0.9, 1.7,
+    2.4, 3.5),
+  tags: (-2.5, -1.9, -0.35, 0.63, 1.38, 2.06, 3.14),
+  plot-x-tick-step: 2,
 )
 ```
 
