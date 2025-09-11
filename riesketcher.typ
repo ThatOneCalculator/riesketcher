@@ -1,10 +1,11 @@
 #import "@preview/cetz-plot:0.1.2"
+#import "util.typ": _validate-partition, _validate-tagged-partition
 
 /// Draw a Riemann sum of a function, and optionally plot the function.
 ///
 /// - fn (function): The function to draw a Riemann sum of.
-/// - domain (array): Tuple of the domain of fn. If a tuple value is auto, that
-///   value is set to start/end.
+/// - domain (array): Tuple of the domain of `fn`. If a tuple value is `auto`, that
+///   value is set to `start`/`end`.
 /// - start (number): The starting point for the bars. Used only if `partition`
 ///   is not a valid array; otherwise, the first value of `partition` is used.
 /// - end (number): The ending point for the bars. Used only if `partition` is
@@ -12,7 +13,7 @@
 /// - n (number): Number of bars. Used only if `partition` is not a valid array;
 ///   otherwise, the number of bars is determined by the length of `partition`.
 /// - method (string): Determines where the sample points for bar heights are
-///   taken ("left", "mid"/"midpoint", or "right"). Used only if `tags` is not a
+///   taken (`left`, `mid`/`midpoint`, or `right`). Used only if `tags` is not a
 ///   valid array; otherwise, bar heights are taken from `tags`.
 /// - partition (array, none): (optional) Array of partition points. If valid, it
 ///   overrides `start`, `end`, and `n`; otherwise, equal partitions are
@@ -52,23 +53,10 @@
   plot-line-color: color.blue,
   size: (5, 5),
 ) = {
-  // check duplicates in array
-  let check-dup(arr) = {
-    for i in range(0, arr.len() - 1) {
-      if arr.at(i) == arr.at(i + 1) {
-        return true
-      }
-    }
-    return false
-  }
   let delta-x = 0  // store fallback bar width if partition is invalid
 
   // check if partition is valid
-  let is-valid-partition = false
-  if partition != none and partition.len() > 1 {
-    let sorted-partition = partition.sorted()
-    is-valid-partition = partition == sorted-partition and not check-dup(partition)
-  }
+  let is-valid-partition = _validate-partition(partition)
   if is-valid-partition {
     start = partition.at(0)
     end = partition.at(-1)
@@ -90,14 +78,7 @@
   }
 
   // check if tags are valid
-  let is-valid-tags = false
-  if is-valid-partition and tags != none and tags.len() > 0 and partition.len() == tags.len() + 1 {
-    let sorted-tags = tags.sorted()
-    if tags == sorted-tags and not check-dup(tags) {
-      let zipped = (partition.zip(tags), partition.at(-1)).flatten()
-      is-valid-tags = zipped == zipped.sorted()
-    }
-  }
+  let is-valid-tags = _validate-tagged-partition(partition, tags)
 
   // calculate bar heights
   let bar-y = none

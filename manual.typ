@@ -1,14 +1,14 @@
 #import "@preview/tidy:0.1.0"
 #import "@preview/cetz:0.4.1": canvas
-#import "riesketcher.typ": riesketcher
-// #import "@preview/riesketcher:0.3.0": riesketcher
+#import "lib.typ": riesketcher
+// #import "@preview/riesketcher:0.3.1": riesketcher
 
 #set text(size: 10.5pt)
 
 = Riesketcher
 A package to draw Riemann sums (and their plots) of a function with CeTZ.
 ```typst
-#import "@preview/riesketcher:0.3.0": riesketcher
+#import "@preview/riesketcher:0.3.1": riesketcher
 ```
 
 #show raw.where(lang: "example"): it => block({
