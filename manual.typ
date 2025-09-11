@@ -85,13 +85,26 @@ riesketcher(
 )
 ```
 
-=== Trapezoidal Rule
+#pagebreak()
+
+=== Trapezoidal Rule (uniform grid)
+
 ```example
 trapezoidal(
   x => calc.pow(x, 3) + 4,
   start: -3,
   end: 3.5,
   n: 7,
+  plot-x-tick-step: 1,
+  positive-color: rgb("#210aa4")
+)
+```
+
+=== Trapezoidal Rule (non-uniform grid)
+
+```example
+trapezoidal(
+  x => calc.pow(x, 3) + 4,
   partition: (-3, -0.4, 2, 3.1, 3.5),
   plot-x-tick-step: 1,
   positive-color: rgb("#210aa4")
