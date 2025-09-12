@@ -121,7 +121,7 @@
           let (xl, yl) = subdata.at(p)
           let (xr, yr) = subdata.at(p + 1)
           cetz-plot.plot.add(((xl, 0), (xl, yl), (xr, yr), (xr, 0)),
-            style: if yl >= 0 { positive-trapezoid-style } else { negative-trapezoid-style },
+            style: if yl > 0 or yr > 0 { positive-trapezoid-style } else { negative-trapezoid-style },
             fill: true
           )
         }

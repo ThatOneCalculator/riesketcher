@@ -12,4 +12,4 @@ Usage example and docs: [manual.pdf](https://github.com/ThatOneCalculator/rieske
 
 ![Demo for custom partitions](https://github.com/VincentTam/riesketcher/assets/5748535/3b830cb8-c017-4ed4-9410-7f3bad79edab)
 
-![Demo for trapezoidal rule](https://github.com/user-attachments/assets/2374578d-5c60-4910-8e6d-009fb8b8a44d)
+![Demo for trapezoidal rule](https://github.com/user-attachments/assets/f72b6a96-2c8e-4b95-a4d1-cad89fbb75e0)

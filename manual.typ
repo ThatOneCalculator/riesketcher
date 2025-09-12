@@ -104,7 +104,7 @@ trapezoidal(
 
 ```example
 trapezoidal(
-  x => calc.pow(x, 3) + 4,
+  x => -calc.pow(x, 3) - 4,
   partition: (-3, -0.4, 2, 3.1, 3.5),
   plot-x-tick-step: 1,
   positive-color: rgb("#210aa4")
