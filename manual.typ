@@ -1,20 +1,20 @@
 #import "@preview/tidy:0.1.0"
 #import "@preview/cetz:0.4.1": canvas
-#import "riesketcher.typ": riesketcher
-// #import "@preview/riesketcher:0.3.0": riesketcher
+#import "lib.typ": riesketcher, trapezoidal
+// #import "@preview/riesketcher:0.4.0": riesketcher, trapezoidal
 
 #set text(size: 10.5pt)
 
 = Riesketcher
-A package to draw Riemann sums (and their plots) of a function with CeTZ.
+A package to draw Riemann sums (left, right, midpoint, and trapezoidal) and their plots for functions using CeTZ; supports tagged and untagged partitions.
 ```typst
-#import "@preview/riesketcher:0.3.0": riesketcher
+#import "@preview/riesketcher:0.4.0": riesketcher, trapezoidal
 ```
 
 #show raw.where(lang: "example"): it => block({
   table(columns: (50%, 50%), stroke: none, align: (center + horizon, left),
     align(left, raw(lang: "typc", it.text)),
-    eval("canvas({" + it.text + "})", scope: (canvas: canvas, riesketcher: riesketcher))
+    eval("canvas({" + it.text + "})", scope: (canvas: canvas, riesketcher: riesketcher, trapezoidal: trapezoidal))
   )
 })
 
@@ -86,9 +86,40 @@ riesketcher(
 ```
 
 #pagebreak()
+
+=== Trapezoidal Rule (uniform grid)
+
+```example
+trapezoidal(
+  x => calc.pow(x, 3) + 4,
+  start: -3,
+  end: 3.5,
+  n: 7,
+  plot-x-tick-step: 1,
+  positive-color: rgb("#210aa4")
+)
+```
+
+=== Trapezoidal Rule (non-uniform grid)
+
+```example
+trapezoidal(
+  x => -calc.pow(x, 3) - 4,
+  partition: (-3, -0.4, 2, 3.1, 3.5),
+  plot-x-tick-step: 1,
+  positive-color: rgb("#210aa4")
+)
+```
+
+#pagebreak()
 #set align(left)
 
 == Method parameters
 
 #let riesketcher-tidy = tidy.parse-module(read("riesketcher.typ"), name: "riesketcher")
 #tidy.show-module(riesketcher-tidy)
+
+#pagebreak()
+
+#let trapezoidal-tidy = tidy.parse-module(read("trapezoidal.typ"), name: "trapezoidal")
+#tidy.show-module(trapezoidal-tidy)
